@@ -11,13 +11,20 @@ class TaskController extends Controller
     // URLのidをindexアクションで受け取る
     public function index(int $id)
     {
-        // フォルダーテーブルのレコードをすべて格納
+        // フォルダテーブルのレコードをすべて取得
         $folders = Folder::all();
+
+        // 選択されたフォルダのレコードを取得
+        $current_folder = Folder::find($id);
+
+        // 選択されたフォルダに紐づくタスクのレコードを取得(getを忘れないよう注意)
+        $tasks = Task::where('folder_id', $current_folder->id)->get();
 
         // ビューを返す
         return view('tasks/index', [
             'folders' => $folders,
-            'current_folder_id' => $id
+            'current_folder_id' => $current_folder,
+            'tasks' => $tasks
         ]);
     }
 }
