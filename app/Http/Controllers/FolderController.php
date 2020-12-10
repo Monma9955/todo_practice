@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Folder;
+use App\Http\Requests\CreateFolder;
 use Illuminate\Http\Request;
 
 class FolderController extends Controller
@@ -13,7 +14,7 @@ class FolderController extends Controller
     }
 
     // リクエストを引数「$request」として渡す
-    public function create(Request $request)
+    public function create(CreateFolder $request)
     {
         $folder = new Folder();
         // フォルダーテーブルのtitleカラムに入力値のtitleを代入
