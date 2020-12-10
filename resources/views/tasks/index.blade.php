@@ -1,19 +1,6 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>ToDo App</title>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-<header>
-  <nav class="my-navbar">
-    <a class="my-navbar-brand" href="/">ToDo App</a>
-  </nav>
-</header>
-<main>
+@extends('layout')
+
+@section('content')
   <div class="container">
     <div class="row">
       <div class="col col-md-4">
@@ -25,10 +12,11 @@
             </a>
           </div>
           <div class="list-group">
-            {{-- フォルダ一覧を表示 --}}
             @foreach($folders as $folder)
-              <a href="{{ route('tasks.index', ['id' => $folder->id]) }}"
-                class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : ''}}">
+              <a
+                  href="{{ route('tasks.index', ['id' => $folder->id]) }}"
+                  class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : '' }}"
+              >
                 {{ $folder->title }}
               </a>
             @endforeach
@@ -55,23 +43,20 @@
             </tr>
             </thead>
             <tbody>
-              {{-- タスク一覧を表示 --}}
-              @foreach($tasks as $task)
-                <tr>
-                  <td>{{ $task->title }}</td>
-                  <td>
-                    <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
-                  </td>
-                  <td>{{ $task->formatted_due_date }}</td>
-                  <td><a href="#">編集</a></td>
-                </tr>
-              @endforeach
+            @foreach($tasks as $task)
+              <tr>
+                <td>{{ $task->title }}</td>
+                <td>
+                  <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
+                </td>
+                <td>{{ $task->formatted_due_date }}</td>
+                <td><a href="#">編集</a></td>
+              </tr>
+            @endforeach
             </tbody>
           </table>
         </div>
       </div>
     </div>
   </div>
-</main>
-</body>
-</html>
+@endsection
