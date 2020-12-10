@@ -26,7 +26,7 @@ class CreateFolder extends FormRequest
     {
         return [
             // name属性がtitleの入力欄の入力は必須
-            'title' => 'required'
+            'title' => 'required|max:20'
         ];
     }
 
