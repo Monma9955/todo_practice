@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ToDo App</title>
+  {{-- flatpickrのデフォルトのスタイルシート --}}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  {{-- ブルーテーマの追加スタイルシート --}}
   <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
@@ -50,7 +52,9 @@
   </div>
 </main>
 
+{{-- flatpickrスクリプト --}}
 <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+{{-- 日本語化のための追加スクリプト --}}
 <script src="https://npmcdn.com/flatpickr/dist/l10n/ja.js"></script>
 <script>
   flatpickr(document.getElementById('due_date'), {
