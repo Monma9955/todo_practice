@@ -13,7 +13,8 @@ class CreateFolder extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        // 権限チェックはせずリクエストを受け付ける
+        return true;
     }
 
     /**
@@ -24,7 +25,8 @@ class CreateFolder extends FormRequest
     public function rules()
     {
         return [
-            //
+            // name属性がtitleの入力欄の入力は必須
+            'title' => 'required'
         ];
     }
 }
