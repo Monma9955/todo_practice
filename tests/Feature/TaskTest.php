@@ -28,6 +28,22 @@ class TaskTest extends TestCase
     }
 
     /**
+     * 期限日が未入力の場合はバリデーションエラー
+     * @test
+     */
+    public function due_date_should()
+    {
+        $response = $this->post('/folders/1/tasks/create', [
+            'title' => 'Sample task',
+            'due_date' => "", //未入力
+        ]);
+
+        $response->assertSessionHasErrors([
+            'due_date' => '期限日 は必須入力です。',
+        ]);
+    }
+
+    /**
      * 期限日が日付ではない場合はバリデーションエラー
      * @test
      */
