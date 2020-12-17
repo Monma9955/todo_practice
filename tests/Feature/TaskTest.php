@@ -31,7 +31,7 @@ class TaskTest extends TestCase
      * 期限日が未入力の場合はバリデーションエラー
      * @test
      */
-    public function due_date_should()
+    public function due_date_must_be_entered()
     {
         $response = $this->post('/folders/1/tasks/create', [
             'title' => 'Sample task',
