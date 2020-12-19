@@ -37,7 +37,7 @@ class EditTask extends CreateTask
         $messages = parent::messages();
 
         // 状態のラベル名を取り出し
-        $status_labels = array_map(function($item) {
+        $status_labels = array_map(function ($item) {
             return $item['label'];
         }, Task::STATUS);
 
