@@ -14,7 +14,7 @@ class HomeController extends Controller
         $folder = $user->folders()->first();
 
         // フォルダが存在しなければhomeビューを表示
-        if(is_null($folder)) {
+        if (is_null($folder)) {
             return view('home');
         }
 
