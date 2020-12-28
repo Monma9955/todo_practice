@@ -12,13 +12,13 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
     // URLのidをindexアクションで受け取る
-    public function index(int $id)
+    public function index(int $folder_id)
     {
         // ログインユーザーに紐づくフォルダを取得
         $folders = Auth::user()->folders()->get();
 
         // 選択されたフォルダのレコードを取得
-        $current_folder = Folder::find($id);
+        $current_folder = Folder::find($folder_id);
 
         // カレントフォルダが存在しない場合は404エラーを返す
         if (is_null($current_folder)) {
@@ -36,16 +36,16 @@ class TaskController extends Controller
         ]);
     }
 
-    public function showCreateForm(int $id)
+    public function showCreateForm(int $folder_id)
     {
         return view('tasks/create', [
-            'folder_id' => $id
+            'folder_id' => $folder_id
         ]);
     }
 
-    public function create(int $id, CreateTask $request)
+    public function create(int $folder_id, CreateTask $request)
     {
-        $current_folder = Folder::find($id);
+        $current_folder = Folder::find($folder_id);
 
         $task = new Task();
         $task->title = $request->title;
@@ -56,11 +56,11 @@ class TaskController extends Controller
 
         // 作成したタスクの格納されているフォルダーのindexにリダイレクト
         return redirect()->route('tasks.index', [
-            'id' => $current_folder->id
+            'folder_id' => $current_folder->id
         ]);
     }
 
-    public function showEditForm(int $id, int $task_id)
+    public function showEditForm(int $folder_id, int $task_id)
     {
         $task = Task::find($task_id);
 
@@ -69,7 +69,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function edit(int $id, int $task_id, EditTask $request)
+    public function edit(int $folder_id, int $task_id, EditTask $request)
     {
         // DBからリクエストされたタスクを取得
         $task = Task::find($task_id);
@@ -81,7 +81,7 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->route('tasks.index', [
-            'id' => $task->folder_id,
+            'folder_id' => $task->folder_id,
         ]);
     }
 }
