@@ -14,11 +14,16 @@ class TaskController extends Controller
     // URLのidをindexアクションで受け取る
     public function index(int $id)
     {
-        // フォルダテーブルのレコードをすべて取得
+        // ログインユーザーに紐づくフォルダを取得
         $folders = Auth::user()->folders()->get();
 
         // 選択されたフォルダのレコードを取得
         $current_folder = Folder::find($id);
+
+        // カレントフォルダが存在しない場合は404エラーを返す
+        if (is_null($current_folder)) {
+            abort(404);
+        }
 
         // 選択されたフォルダに紐づくタスクのレコードを取得(getを忘れないよう注意)
         $tasks = $current_folder->tasks()->get();
