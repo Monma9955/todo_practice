@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Mail\ResetPassword;
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {
@@ -44,5 +46,11 @@ class User extends Authenticatable
     public function folders()
     {
         return $this->hasMany('App\Models\Folder');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        // 引数にトークンを渡してmailableクラスからメールを作成
+        Mail::to($this)->send(new ResetPassword($token));
     }
 }
