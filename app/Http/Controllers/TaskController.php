@@ -12,55 +12,45 @@ use Illuminate\Support\Facades\Auth;
 class TaskController extends Controller
 {
     // URLのidをindexアクションで受け取る
-    public function index(int $folder_id)
+    public function index(Folder $folder)
     {
         // ログインユーザーに紐づくフォルダを取得
         $folders = Auth::user()->folders()->get();
 
-        // 選択されたフォルダのレコードを取得
-        $current_folder = Folder::find($folder_id);
-
-        // カレントフォルダが存在しない場合は404エラーを返す
-        if (is_null($current_folder)) {
-            abort(404);
-        }
-
         // 選択されたフォルダに紐づくタスクのレコードを取得(getを忘れないよう注意)
-        $tasks = $current_folder->tasks()->get();
+        $tasks = $folder->tasks()->get();
 
         // ビューを返す
         return view('tasks/index', [
             'folders' => $folders,
-            'current_folder_id' => $current_folder,
+            'current_folder_id' => $folder->id,
             'tasks' => $tasks
         ]);
     }
 
-    public function showCreateForm(int $folder_id)
+    public function showCreateForm(Folder $folder)
     {
         return view('tasks/create', [
-            'folder_id' => $folder_id
+            'folder' => $folder->id,
         ]);
     }
 
-    public function create(int $folder_id, CreateTask $request)
+    public function create(Folder $folder, CreateTask $request)
     {
-        $current_folder = Folder::find($folder_id);
-
         $task = new Task();
         $task->title = $request->title;
         $task->due_date = $request->due_date;
 
-        // current_folderのタスクとしてテーブルに保存
-        $current_folder->tasks()->save($task);
+        // 現在のフォルダーのタスクとしてテーブルに保存
+        $folder->tasks()->save($task);
 
         // 作成したタスクの格納されているフォルダーのindexにリダイレクト
         return redirect()->route('tasks.index', [
-            'folder_id' => $current_folder->id
+            'folder' => $folder->id,
         ]);
     }
 
-    public function showEditForm(int $folder_id, int $task_id)
+    public function showEditForm(Folder $folder, int $task_id)
     {
         $task = Task::find($task_id);
 
@@ -69,7 +59,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function edit(int $folder_id, int $task_id, EditTask $request)
+    public function edit(Folder $folder, int $task_id, EditTask $request)
     {
         // DBからリクエストされたタスクを取得
         $task = Task::find($task_id);
@@ -81,7 +71,7 @@ class TaskController extends Controller
         $task->save();
 
         return redirect()->route('tasks.index', [
-            'folder_id' => $task->folder_id,
+            'folder' => $task->folder_id,
         ]);
     }
 }
