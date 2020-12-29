@@ -25,7 +25,7 @@ class FolderController extends Controller
 
         // 作成したフォルダーIDで一覧に戻る
         return redirect()->route('tasks.index', [
-            'folder_id' => $folder->id
+            'folder' => $folder->id
         ]);
     }
 }

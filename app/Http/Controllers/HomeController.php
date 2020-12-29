@@ -20,7 +20,7 @@ class HomeController extends Controller
 
         // フォルダが存在していればtasks.indexビューを表示
         return redirect()->route('tasks.index', [
-            'folder_id' => $folder->id,
+            'folder' => $folder->id,
         ]);
     }
 }
