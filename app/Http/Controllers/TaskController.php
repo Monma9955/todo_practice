@@ -50,20 +50,15 @@ class TaskController extends Controller
         ]);
     }
 
-    public function showEditForm(Folder $folder, int $task_id)
+    public function showEditForm(Folder $folder, Task $task)
     {
-        $task = Task::find($task_id);
-
         return view('tasks/edit', [
             'task' => $task,
         ]);
     }
 
-    public function edit(Folder $folder, int $task_id, EditTask $request)
+    public function edit(Folder $folder, Task $task, EditTask $request)
     {
-        // DBからリクエストされたタスクを取得
-        $task = Task::find($task_id);
-
         // $taskにリクエストのデータを代入してsave
         $task->title = $request->title;
         $task->status = $request->status;
