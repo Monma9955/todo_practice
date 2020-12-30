@@ -52,6 +52,11 @@ class TaskController extends Controller
 
     public function showEditForm(Folder $folder, Task $task)
     {
+        // フォルダーのIDが編集中タスクのフォルダIDと異なる場合は404エラー
+        if ($folder->id !== $task->folder_id) {
+            abort(404);
+        }
+
         return view('tasks/edit', [
             'task' => $task,
         ]);
@@ -59,6 +64,10 @@ class TaskController extends Controller
 
     public function edit(Folder $folder, Task $task, EditTask $request)
     {
+        // フォルダーのIDが編集中タスクのフォルダIDと異なる場合は404エラー
+        if ($folder->id !== $task->folder_id) {
+            abort(404);
+        }
         // $taskにリクエストのデータを代入してsave
         $task->title = $request->title;
         $task->status = $request->status;
