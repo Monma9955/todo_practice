@@ -14,6 +14,9 @@ class TaskController extends Controller
     // URLのidをindexアクションで受け取る
     public function index(Folder $folder)
     {
+        if (Auth::user()->id !== $folder->user_id) {
+            abort(403);
+        }
         // ログインユーザーに紐づくフォルダを取得
         $folders = Auth::user()->folders()->get();
 
