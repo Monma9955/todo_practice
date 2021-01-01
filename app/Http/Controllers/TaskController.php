@@ -52,10 +52,8 @@ class TaskController extends Controller
 
     public function showEditForm(Folder $folder, Task $task)
     {
-        // フォルダーのIDが編集中タスクのフォルダIDと異なる場合は404エラー
-        if ($folder->id !== $task->folder_id) {
-            abort(404);
-        }
+        // checkRelationでリレーションのエラーチェック
+        $this->checkRelation($folder, $task);
 
         return view('tasks/edit', [
             'task' => $task,
@@ -64,10 +62,8 @@ class TaskController extends Controller
 
     public function edit(Folder $folder, Task $task, EditTask $request)
     {
-        // フォルダーのIDが編集中タスクのフォルダIDと異なる場合は404エラー
-        if ($folder->id !== $task->folder_id) {
-            abort(404);
-        }
+        $this->checkRelation($folder, $task);
+
         // $taskにリクエストのデータを代入してsave
         $task->title = $request->title;
         $task->status = $request->status;
@@ -77,5 +73,13 @@ class TaskController extends Controller
         return redirect()->route('tasks.index', [
             'folder' => $task->folder_id,
         ]);
+    }
+
+    private function checkRelation(Folder $folder, Task $task)
+    {
+        // フォルダーのIDが編集中タスクのフォルダIDと異なる場合は404エラー
+        if ($folder->id !== $task->folder_id) {
+            abort(404);
+        }
     }
 }
