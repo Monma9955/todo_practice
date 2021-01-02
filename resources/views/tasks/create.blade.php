@@ -18,7 +18,7 @@
                 @endforeach
               </div>
             @endif
-            <form action="{{ route('tasks.create', ['id' => $folder_id]) }}" method="POST">
+            <form action="{{ route('tasks.create', ['folder' => $folder]) }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="title">タイトル</label>
