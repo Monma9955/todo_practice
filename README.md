@@ -31,10 +31,25 @@ PHPとLaravelの最初の開発練習として[Hypertext Candy](https://www.hype
 
 ## DB設計
 
+### usersテーブル
+
+|Column|Type|Options|
+|------|----|-------|
+|name|string(255)|null: false|
+|email|string(255)|null: false|
+|email_verified_at|timestamp||
+|password|string(255)|null: false|
+|remember_token|string(100)||
+
+#### リレーション
+
+* has_many :folders
+
 ### foldersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
+|user_id|bigint|null: false, foreign_key: true|
 |title|string(20)|null: false|
 
 #### リレーション
