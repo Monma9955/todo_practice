@@ -6,10 +6,15 @@
 PHPとLaravelの最初の開発練習として[Hypertext Candy](https://www.hypertextcandy.com/laravel-tutorial-introduction)様のチュートリアルを基に作成しました。
 2020/11/30〜作成開始。
 
+## フォルダ(タスク)一覧イメージ画像
+
+<img width="1053" alt="ToDo_App" src="https://user-images.githubusercontent.com/55307855/103459266-652bef80-4d51-11eb-9aa7-87dce515a83b.png">
+
 ## 開発環境
 
 * 言語: PHP 7.4.9（MAMP）
 * フレームワーク： Laravel 8.16.1
+* その他使用技術： HTML(bladeテンプレート), CSS(bootstrap), Javascript
 * 開発・テスト用DB： MySQL（phpMyAdmin）
 * エディター：Visual Studio Code
 
@@ -23,6 +28,8 @@ PHPとLaravelの最初の開発練習として[Hypertext Candy](https://www.hype
 * タスク編集機能（バリデーションテスト済み）
 * ユーザー登録・ログイン・ログアウト機能
 * パスワード再設定機能
+* ミドルウェアを使用した認可処理
+* オリジナル403, 404, 500エラーページ表示
 
 ## 工夫した点
 
