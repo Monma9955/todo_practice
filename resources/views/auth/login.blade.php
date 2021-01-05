@@ -30,6 +30,9 @@
             </form>
           </div>
         </nav>
+        <div class="test-user">
+          テストユーザーアドレス：dummy@email.com | パスワード：test1234
+        </div>
         <div class="text-center">
           <a href="{{ route('password.request') }}">パスワードの変更はこちらから</a>
         </div>
