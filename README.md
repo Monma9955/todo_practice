@@ -17,6 +17,7 @@ PHPとLaravelの最初の開発練習として[Hypertext Candy](https://www.hype
 * その他使用技術： HTML(bladeテンプレート), CSS(bootstrap), Javascript
 * 開発・テスト用DB： MySQL（phpMyAdmin）
 * エディター：Visual Studio Code
+* 本番環境： heroku / DB:PostgreSQL
 
 ## アプリ機能
 
@@ -30,6 +31,11 @@ PHPとLaravelの最初の開発練習として[Hypertext Candy](https://www.hype
 * パスワード再設定機能
 * ミドルウェアを使用した認可処理
 * オリジナル403, 404, 500エラーページ表示
+* herokuへのデプロイ
+
+### 未実装の機能
+
+* 本番環境のパスワード再設定機能(メール送信機能部分 / herokuのSendGridアドオンが凍結されたため)
 
 ## 工夫した点
 
